@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { ROUTE } from '../constants/constats';
+import { ROUTE } from '../constants/constants';
 import { MainPage, SignInPage, SignUpPage, NotFoundPage } from '../pages';
 
 const App = (): JSX.Element => {
