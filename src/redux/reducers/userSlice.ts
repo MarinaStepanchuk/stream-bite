@@ -1,11 +1,13 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IUser } from 'types/userInterface';
+import { IUser } from 'common-types/userInterface';
 
 interface IInitialStateUserSlice {
+  isAuth: boolean;
   user: IUser;
 }
 
 export const initialState: IInitialStateUserSlice = {
+  isAuth: false,
   user: {
     id: 0,
     email: '',

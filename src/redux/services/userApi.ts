@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ILoginForm, IUser } from 'types/userInterface';
+import { ILoginForm, IUser } from 'common-types/userInterface';
 
 const baseUrl = 'http://localhost:5000/api';
 
