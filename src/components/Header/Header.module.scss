@@ -1,0 +1,16 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.header {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  @include flex($dir: row, $jc: space-between);
+  background-color: #000;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 1.8rem;
+  color: $color-primary;
+}
