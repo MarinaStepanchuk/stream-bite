@@ -1,27 +1,32 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IUser } from 'types/userInterface';
+import { IUser } from 'common-types/userInterface';
+import { getTokenFromLocalStorage } from '../../utils/localStorageHelpers';
 
 interface IInitialStateUserSlice {
-  user: IUser;
+  isAuth: boolean;
+  user: IUser | null;
 }
 
 export const initialState: IInitialStateUserSlice = {
-  user: {
-    id: 0,
-    email: '',
-    name: '',
-  },
+  isAuth: !!getTokenFromLocalStorage(),
+  user: null,
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser(state, action: PayloadAction<IUser>) {
-      state.user = action.payload;
+    login(state, action: PayloadAction<IUser>) {
+      const { id, name, email } = action.payload;
+      state.user = { id, name, email };
+      state.isAuth = true;
+    },
+    logout(state) {
+      state.user = null;
+      state.isAuth = false;
     },
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { login, logout } = userSlice.actions;
 export default userSlice.reducer;
