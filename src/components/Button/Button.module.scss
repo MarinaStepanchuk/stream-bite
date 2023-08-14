@@ -15,7 +15,41 @@
   border-radius: 10px;
 
   &:disabled {
-    background-color: red;
+    background-color: #ff9800;
+
+    i {
+      &::before {
+        border: 2px solid #ff9800;
+      }
+
+      &::after {
+        border: 2px solid #ff9800;
+      }
+    }
+  }
+
+  &:disabled:hover {
+    background: #ff9800;
+    color: #fff;
+    box-shadow: none;
+    animation: none;
+    letter-spacing: 0.1rem;
+
+    i {
+      &::before {
+        width: 10px;
+        left: 70%;
+        animation: none;
+        border: 2px solid #ff9800;
+      }
+
+      &::after {
+        width: 10px;
+        left: 20%;
+        animation: none;
+        border: 2px solid #ff9800;
+      }
+    }
   }
 
   &:hover {
@@ -24,6 +58,7 @@
     background: #0ff0fc;
     color: #0ff0fc;
     animation: box 3s infinite;
+    background-color: #0ff0fc;
 
     i::before {
       width: 15px;

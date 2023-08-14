@@ -1,18 +1,22 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ILoginForm, IUser } from 'common-types/userInterface';
+import { ILoginForm, IRegisterForm, IUser, IUserDataResponse } from '../../common-types/index';
+import { baseApi } from './baseApi';
 
-const baseUrl = 'http://localhost:5000/api';
-
-export const userApi = createApi({
-  reducerPath: 'userApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl,
-  }),
-  tagTypes: ['User'],
+const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    registerUser: build.mutation<IUser, ILoginForm>({
+    registerUser: build.mutation<{ user: IUser }, IRegisterForm>({
+      query: ({ email, password, name }) => ({
+        url: '/user',
+        method: 'POST',
+        body: {
+          email,
+          name,
+          password,
+        },
+      }),
+    }),
+    signin: build.mutation<IUserDataResponse, ILoginForm>({
       query: ({ email, password }) => ({
-        url: '/register',
+        url: '/auth/login',
         method: 'POST',
         body: {
           email,
@@ -23,4 +27,4 @@ export const userApi = createApi({
   }),
 });
 
-export const { useRegisterUserMutation } = userApi;
+export const { useRegisterUserMutation, useSigninMutation } = userApi;
