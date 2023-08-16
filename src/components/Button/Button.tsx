@@ -7,7 +7,7 @@ const Button = ({
   disabled = false,
   cb,
   content,
-  type,
+  type = 'button',
 }: IButtonProps): JSX.Element => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
