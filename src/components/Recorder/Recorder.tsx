@@ -3,8 +3,14 @@ import { RecorderPreview } from '../RecorderPreview/RecorderPreview';
 import { CircleProgress } from '../CircleProgress/CircleProgress';
 import styles from './Recorder.module.scss';
 import { useEffect, useRef, useState } from 'react';
+import { useCreatePostMutation } from '../../redux/services/postsApi';
+import { ICustomError } from '../../common-types';
 
-const Recorder = (): JSX.Element => {
+const Recorder = ({
+  setOpen,
+}: {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}): JSX.Element => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [error, setError] = useState<null | string>(null);
   const [pause, setPause] = useState(true);
@@ -14,6 +20,7 @@ const Recorder = (): JSX.Element => {
   const [startRecord, setStartRecord] = useState(false);
   const [recorder, setRecorder] = useState<MediaRecorder>();
   const [progress, setProgress] = useState(0);
+  const [createPost, { error: createPostError, data: createPostData }] = useCreatePostMutation();
 
   const startStream = () => {
     navigator.mediaDevices
@@ -57,6 +64,13 @@ const Recorder = (): JSX.Element => {
     }
   };
 
+  const handleStop = () => {
+    if (recorder) {
+      recorder?.stop();
+      setStartRecord(false);
+    }
+  };
+
   useEffect(() => {
     if (startRecord) {
       const interval = setInterval(() => {
@@ -76,13 +90,6 @@ const Recorder = (): JSX.Element => {
     }
   }, [startRecord]);
 
-  const handleStop = () => {
-    if (recorder) {
-      recorder?.stop();
-      setStartRecord(false);
-    }
-  };
-
   const handleChangeVideoState = () => {
     if (pause) {
       handleStart();
@@ -93,15 +100,27 @@ const Recorder = (): JSX.Element => {
     setPause(!pause);
   };
 
-  const saveVideo = () => {};
+  const saveVideo = async (video: Blob) => {
+    await createPost(video);
+  };
 
   const removeVideo = () => {
     setOpenPreview(false);
   };
 
+  useEffect(() => {
+    if (createPostError) {
+      alert((createPostError as ICustomError).data.message);
+    }
+
+    if (createPostData) {
+      setOpen(false);
+    }
+  }, [createPostError, createPostData]);
+
   return (
     <div className={styles.recorder}>
-      <video playsInline muted autoPlay ref={videoRef}></video>
+      <video className={styles.recorderVideo} playsInline muted autoPlay ref={videoRef}></video>
       {error && <p className={styles.errorMessage}>{error}</p>}
       <div className={styles.controlButton}>
         <CircleProgress progress={progress} />

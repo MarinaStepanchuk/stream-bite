@@ -1,6 +1,6 @@
 interface IRecorderPreview {
   video: Blob;
-  saveVideo: () => void;
+  saveVideo: (video: Blob) => Promise<void>;
   removeVideo: () => void;
 }
 

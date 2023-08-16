@@ -8,13 +8,9 @@
   height: 100%;
   background-color: #353535;
   border-radius: 1rem;
-  @include flex();
-
-  video {
-    transform: scale(1, 1);
-  }
+  @include flex($gap: 3rem);
 
   .actions {
-    @include flex($dir: row);
+    @include flex($dir: row, $gap: 3rem);
   }
 }

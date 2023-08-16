@@ -19,7 +19,7 @@ const Author = (): JSX.Element => {
       </div>
       {open && (
         <Modal open={open} setOpen={setOpen}>
-          {<Recorder />}
+          {<Recorder setOpen={setOpen} />}
         </Modal>
       )}
     </div>

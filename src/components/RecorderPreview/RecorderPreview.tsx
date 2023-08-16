@@ -14,7 +14,7 @@ const RecorderPreview = ({ video, saveVideo, removeVideo }: IRecorderPreview): J
         className={styles.previewVIdeo}
       ></video>
       <div className={styles.actions}>
-        <Button content="SAVE" cb={saveVideo} />
+        <Button content="SAVE" cb={async () => await saveVideo(video)} />
         <Button content="CANCEL" cb={removeVideo} />
       </div>
     </div>
