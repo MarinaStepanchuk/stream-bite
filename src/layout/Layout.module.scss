@@ -1,5 +1,5 @@
 @import '../styles/mixins.scss';
 
 .main {
-  @include flex($jc: flex-start);
+  @include flex($jc: flex-start, $gap: 2rem);
 }

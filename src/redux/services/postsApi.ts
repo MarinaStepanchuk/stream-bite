@@ -1,25 +1,29 @@
+import { IPost } from 'common-types';
 import { baseApi } from './baseApi';
 
-interface IPost {
-  id: number;
-  video: Blob;
-}
+const apiWithTag = baseApi.enhanceEndpoints({ addTagTypes: ['Posts'] });
 
-const postsApi = baseApi.injectEndpoints({
+const postsApi = apiWithTag.injectEndpoints({
   endpoints: (build) => ({
     createPost: build.mutation<{ post: IPost }, Blob>({
       query: (video) => {
         const form = new FormData();
         form.append('file', video);
-        console.log(video);
         return {
           url: '/post',
           method: 'POST',
           body: form,
         };
       },
+      invalidatesTags: ['Posts'],
+    }),
+    getAllPosts: build.query<IPost[], void>({
+      query: () => ({
+        url: 'post',
+      }),
+      providesTags: ['Posts'],
     }),
   }),
 });
 
-export const { useCreatePostMutation } = postsApi;
+export const { useCreatePostMutation, useGetAllPostsQuery } = postsApi;
