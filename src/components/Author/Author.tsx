@@ -2,7 +2,7 @@ import styles from './Author.module.scss';
 import avatar from '../../assets/avatar.png';
 import { useState } from 'react';
 import { Modal } from '../Modal/Modal';
-import { Recorder } from '../Recorder/Recorder';
+import { Recorder } from '../PostCreater/Recorder/Recorder';
 
 const Author = (): JSX.Element => {
   const [open, setOpen] = useState(false);

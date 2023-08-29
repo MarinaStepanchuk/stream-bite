@@ -1,0 +1,11 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+
+.previewVideo {
+  max-width: 68rem;
+  padding: 2rem;
+  z-index: 1000;
+  background-color: #353535;
+  border-radius: 1rem;
+  @include flex($gap: 2rem);
+}

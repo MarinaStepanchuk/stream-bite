@@ -1,7 +1,7 @@
 interface IRecorderPreview {
   video: Blob;
-  saveVideo: (video: Blob) => Promise<void>;
   removeVideo: () => void;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export { IRecorderPreview };
