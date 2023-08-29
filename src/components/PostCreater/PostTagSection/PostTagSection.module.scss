@@ -1,0 +1,9 @@
+@import '../../../styles/mixins.scss';
+
+.tagSection {
+  @include flex();
+
+  .tagList {
+    @include flex($dir: row, $wr: wrap);
+  }
+}

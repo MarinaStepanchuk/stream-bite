@@ -1,10 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { RecorderPreview } from '../RecorderPreview/RecorderPreview';
-import { CircleProgress } from '../CircleProgress/CircleProgress';
+import { CircleProgress } from '../../CircleProgress/CircleProgress';
 import styles from './Recorder.module.scss';
 import { useEffect, useRef, useState } from 'react';
-import { useCreatePostMutation } from '../../redux/services/postsApi';
-import { ICustomError } from '../../common-types';
 
 const Recorder = ({
   setOpen,
@@ -20,7 +18,6 @@ const Recorder = ({
   const [startRecord, setStartRecord] = useState(false);
   const [recorder, setRecorder] = useState<MediaRecorder>();
   const [progress, setProgress] = useState(0);
-  const [createPost, { error: createPostError, data: createPostData }] = useCreatePostMutation();
 
   const startStream = () => {
     navigator.mediaDevices
@@ -45,8 +42,10 @@ const Recorder = ({
   };
 
   useEffect(() => {
-    startStream();
-  }, []);
+    if (!openPreview) {
+      startStream();
+    }
+  }, [openPreview]);
 
   useEffect(() => {
     if (recordedChunks.length > 0) {
@@ -100,36 +99,25 @@ const Recorder = ({
     setPause(!pause);
   };
 
-  const saveVideo = async (video: Blob) => {
-    await createPost(video);
-  };
-
   const removeVideo = () => {
     setOpenPreview(false);
   };
 
-  useEffect(() => {
-    if (createPostError) {
-      alert((createPostError as ICustomError).data.message);
-    }
-
-    if (createPostData) {
-      setOpen(false);
-    }
-  }, [createPostError, createPostData]);
-
   return (
-    <div className={styles.recorder}>
-      <video className={styles.recorderVideo} playsInline muted autoPlay ref={videoRef}></video>
-      {error && <p className={styles.errorMessage}>{error}</p>}
-      <div className={styles.controlButton}>
-        <CircleProgress progress={progress} />
-        <div className={styles.recordButton} onClick={handleChangeVideoState}>
-          <div className={pause ? styles.startButton : styles.stopButton}></div>
+    <div className={styles.recorderContainer}>
+      {!openPreview ? (
+        <div className={styles.recorder}>
+          <video className={styles.recorderVideo} playsInline muted autoPlay ref={videoRef}></video>
+          {error && <p className={styles.errorMessage}>{error}</p>}
+          <div className={styles.controlButton}>
+            <CircleProgress progress={progress} />
+            <div className={styles.recordButton} onClick={handleChangeVideoState}>
+              <div className={pause ? styles.startButton : styles.stopButton}></div>
+            </div>
+          </div>
         </div>
-      </div>
-      {openPreview && (
-        <RecorderPreview video={video as Blob} saveVideo={saveVideo} removeVideo={removeVideo} />
+      ) : (
+        <RecorderPreview video={video as Blob} setOpen={setOpen} removeVideo={removeVideo} />
       )}
     </div>
   );
