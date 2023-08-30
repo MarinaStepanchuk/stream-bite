@@ -1,5 +1,6 @@
 @import '../styles/mixins.scss';
 
 .main {
+  max-width: 80rem;
   @include flex($jc: flex-start, $gap: 2rem);
 }

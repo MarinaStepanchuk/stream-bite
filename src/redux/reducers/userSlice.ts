@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { IUser } from 'common-types/userInterface';
-import { getTokenFromLocalStorage } from '../../utils/localStorageHelpers';
+import { getValueFromLocalStorage } from '../../utils/localStorageHelpers';
 
 interface IInitialStateUserSlice {
   isAuth: boolean;
@@ -8,8 +8,8 @@ interface IInitialStateUserSlice {
 }
 
 export const initialState: IInitialStateUserSlice = {
-  isAuth: !!getTokenFromLocalStorage(),
-  user: null,
+  isAuth: !!getValueFromLocalStorage('token'),
+  user: getValueFromLocalStorage('user') || null,
 };
 
 export const userSlice = createSlice({

@@ -1,0 +1,11 @@
+@import '../../styles/mixins.scss';
+
+.feed {
+  list-style: none;
+  @include flex($dir: row, $gap: 2rem);
+  padding: 0;
+
+  li {
+    @include flex($gap: 0.5rem);
+  }
+}

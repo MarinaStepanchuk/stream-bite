@@ -8,9 +8,12 @@ interface ICreatePostData {
 interface IPost {
   id: number;
   name: string;
-  createDate: Date;
-  userName: string;
-  userId: number;
+  createdAt: Date;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+  };
   tags: ITag[];
 }
 

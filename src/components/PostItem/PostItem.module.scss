@@ -18,10 +18,15 @@
     padding: 0 1rem;
     @include flex($dir: row, $jc: space-between);
     color: #fff;
+    font-size: 1.4rem;
 
-    & span:first-of-type {
+    a span {
       font-size: 2rem;
     }
+  }
+
+  .rightPosition {
+    justify-content: flex-end;
   }
 
   .tagsList {
