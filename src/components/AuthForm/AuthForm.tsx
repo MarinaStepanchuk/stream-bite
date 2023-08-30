@@ -12,7 +12,7 @@ import { FIELDS, IAuthForm } from './types';
 import { useRegisterUserMutation, useSigninMutation } from '../../redux/services/userApi';
 import { useAppDispatch } from '../../hooks/redux';
 import { login } from '../../redux/reducers/userSlice';
-import { setTokenToLocalStorage } from '../../utils/localStorageHelpers';
+import { setValueToLocalStorage } from '../../utils/localStorageHelpers';
 import { ICustomError, IUserDataResponse } from '../../common-types/index';
 
 const initialFormState = {
@@ -84,7 +84,8 @@ const AuthForm = ({ cb, register, setRegister }: IAuthForm): JSX.Element => {
     if (dataSignin) {
       const { id, name, email } = dataSignin as IUserDataResponse;
       dispatch(login({ id, name, email }));
-      setTokenToLocalStorage(dataSignin!.token);
+      setValueToLocalStorage('user', { id, name, email });
+      setValueToLocalStorage('token', dataSignin!.token);
       cb();
     }
 

@@ -24,7 +24,12 @@ const postsApi = apiWithTag.injectEndpoints({
       }),
       providesTags: ['Posts'],
     }),
+    getAllUserPosts: build.query<{ posts: IPost[]; count: number }, number>({
+      query: (userId) => ({
+        url: `post/user/${userId}`,
+      }),
+    }),
   }),
 });
 
-export const { useCreatePostMutation, useGetAllPostsQuery } = postsApi;
+export const { useCreatePostMutation, useGetAllPostsQuery, useGetAllUserPostsQuery } = postsApi;

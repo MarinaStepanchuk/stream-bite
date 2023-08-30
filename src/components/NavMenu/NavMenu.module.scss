@@ -1,0 +1,15 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.navigationMenu {
+  @include flex($dir: row, $gap: 2rem);
+  color: #fff;
+
+  a {
+    font-size: 1.6rem;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

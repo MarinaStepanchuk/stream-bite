@@ -1,11 +1,12 @@
 @import '../../styles/mixins.scss';
 
 .usersPanel {
-  @include flex($dir: row, $jc: flex-start, $gap: 2rem);
+  @include flex($dir: row, $jc: flex-start, $gap: 3rem);
   border-bottom: 2px solid #c2c1c1;
   width: 100%;
   padding: 1rem 2rem;
   box-sizing: border-box;
+  overflow-x: auto;
 }
 
 .postsList {

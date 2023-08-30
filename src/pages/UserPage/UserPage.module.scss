@@ -1,0 +1,6 @@
+@import '../../styles/mixins.scss';
+
+.userSection {
+  @include flex();
+  padding: 2rem;
+}

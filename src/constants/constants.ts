@@ -1,6 +1,10 @@
 const ROUTE = {
   mainPage: '/',
   loginPage: '/login',
+  searchPage: '/search',
+  profilePage: '/profile',
+  userPage: '/user',
+  userByIdPage: (id: number) => `/user/${id}`,
   errorPage: '*',
 };
 
