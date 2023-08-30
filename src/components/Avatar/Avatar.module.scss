@@ -1,0 +1,25 @@
+@import '../../styles/mixins.scss';
+
+.userAvatar {
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.bigAvatar {
+  width: 12rem;
+  height: 12rem;
+}
+
+.mediumAvatar {
+  width: 6rem;
+  height: 6rem;
+}
+
+.smallAvatar {
+  width: 4rem;
+  height: 4rem;
+}

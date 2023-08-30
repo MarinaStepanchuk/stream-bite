@@ -1,5 +1,5 @@
 import { BaseQueryFn, FetchArgs, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { getTokenFromLocalStorage } from '../../utils/localStorageHelpers';
+import { getValueFromLocalStorage } from '../../utils/localStorageHelpers';
 import { ICustomError } from '../../common-types/index';
 
 const baseApi = createApi({
@@ -7,7 +7,7 @@ const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_API_URL,
     prepareHeaders: (headers) => {
-      const token = getTokenFromLocalStorage();
+      const token = getValueFromLocalStorage('token');
 
       if (token) {
         headers.set('authorization', `Bearer ${token}`);

@@ -1,14 +1,15 @@
-import { IPost } from 'common-types';
+import { ICreatePostData, IPost } from 'common-types';
 import { baseApi } from './baseApi';
 
-const apiWithTag = baseApi.enhanceEndpoints({ addTagTypes: ['Posts'] });
+const apiWithTag = baseApi.enhanceEndpoints({ addTagTypes: ['Posts', 'Tag'] });
 
 const postsApi = apiWithTag.injectEndpoints({
   endpoints: (build) => ({
-    createPost: build.mutation<{ post: IPost }, Blob>({
-      query: (video) => {
+    createPost: build.mutation<{ post: IPost }, ICreatePostData>({
+      query: ({ video, tags }) => {
         const form = new FormData();
         form.append('file', video);
+        form.append('tags', JSON.stringify(tags));
         return {
           url: '/post',
           method: 'POST',
@@ -23,7 +24,12 @@ const postsApi = apiWithTag.injectEndpoints({
       }),
       providesTags: ['Posts'],
     }),
+    getAllUserPosts: build.query<{ posts: IPost[]; count: number }, number>({
+      query: (userId) => ({
+        url: `post/user/${userId}`,
+      }),
+    }),
   }),
 });
 
-export const { useCreatePostMutation, useGetAllPostsQuery } = postsApi;
+export const { useCreatePostMutation, useGetAllPostsQuery, useGetAllUserPostsQuery } = postsApi;

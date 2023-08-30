@@ -1,0 +1,49 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.tagInputContainer {
+  position: relative;
+  @include flex($dir: row);
+  background-color: $color-primary;
+  overflow: hidden;
+  padding-right: 3rem;
+
+  .tagInput {
+    width: 10rem;
+    border: none;
+    color: #fff;
+    background-color: $color-back-modal;
+    border: 1px solid $color-primary;
+    padding: 0.5rem;
+    font-size: 1.4rem;
+    height: 2rem;
+    outline: none;
+  }
+
+  .cancelButton {
+    width: 1.5rem;
+    height: 1.5rem;
+    top: 4px;
+    right: 1.7rem;
+    position: absolute;
+    cursor: pointer;
+
+    span {
+      position: absolute;
+      display: block;
+      margin: 1rem;
+      width: 1.6rem;
+      height: 1.5px;
+      background-color: #000;
+      border-radius: 1rem;
+    }
+
+    :first-child {
+      transform: rotate(45deg);
+    }
+
+    :last-child {
+      transform: rotate(-45deg);
+    }
+  }
+}

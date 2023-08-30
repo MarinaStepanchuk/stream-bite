@@ -1,0 +1,66 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+
+.tag {
+  position: relative;
+  @include flex($dir: row);
+  background-color: $color-primary;
+  color: #000;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+}
+
+.smallTag {
+  font-size: 1.2rem;
+  padding-right: 3rem;
+
+  .closeButton {
+    width: 1.2rem;
+    height: 1.2rem;
+    top: 2px;
+    right: 2rem;
+
+    span {
+      width: 1.2rem;
+      height: 1.2px;
+    }
+  }
+}
+
+.bigTag {
+  font-size: 2rem;
+  padding-right: 3rem;
+
+  .closeButton {
+    width: 2rem;
+    height: 2rem;
+    top: 6px;
+    right: 15px;
+
+    span {
+      width: 2rem;
+      height: 2px;
+    }
+  }
+}
+
+.closeButton {
+  position: absolute;
+  cursor: pointer;
+
+  span {
+    position: absolute;
+    display: block;
+    margin: 1rem;
+    background-color: #000;
+    border-radius: 1rem;
+  }
+
+  :first-child {
+    transform: rotate(45deg);
+  }
+
+  :last-child {
+    transform: rotate(-45deg);
+  }
+}

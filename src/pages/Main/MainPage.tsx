@@ -1,6 +1,6 @@
 import { CommonList } from '../../components/CommonList/CommonList';
 import { Author } from '../../components/Author/Author';
-import { FriendsList } from '../../components/FriendsList/FriendsList';
+import { Feed } from '../../components/Feed/Feed';
 import styles from './MainPage.module.scss';
 import { useGetAllPostsQuery } from '../../redux/services/postsApi';
 import { useEffect } from 'react';
@@ -10,7 +10,7 @@ const MainPage = (): JSX.Element => {
 
   useEffect(() => {
     if (isError) {
-      alert('Error');
+      alert('Something went wrong, please try again later.');
     }
   }, [isError]);
 
@@ -18,11 +18,11 @@ const MainPage = (): JSX.Element => {
     <>
       <section className={styles.usersPanel}>
         <Author />
-        <FriendsList />
+        <Feed />
       </section>
       <section className={styles.postsList}>
         {isLoading && <p>Loading....</p>}
-        <CommonList posts={data} />
+        <CommonList posts={data} withUserName={true} />
       </section>
     </>
   );

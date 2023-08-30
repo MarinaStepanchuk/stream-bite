@@ -1,0 +1,40 @@
+@import '../../styles/mixins.scss';
+
+.userSection {
+  @include flex($dir: row, $gap: 3rem);
+  padding-top: 3rem;
+
+  p {
+    margin: 0;
+  }
+
+  .followSection {
+    @include flex($gap: 1.5rem, $ai: flex-start);
+  }
+
+  button {
+    font-size: 1rem;
+  }
+
+  .subscriptionSection {
+    @include flex($dir: row, $gap: 2rem);
+    padding-left: 4rem;
+
+    div {
+      @include flex();
+
+      p {
+        margin: 0;
+      }
+
+      & p:first-of-type {
+        font-weight: 700;
+      }
+    }
+  }
+
+  .userName {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+}

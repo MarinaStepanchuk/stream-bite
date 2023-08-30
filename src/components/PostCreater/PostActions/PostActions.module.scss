@@ -1,0 +1,5 @@
+@import '../../../styles/mixins.scss';
+
+.actions {
+  @include flex($dir: row, $gap: 3rem);
+}
