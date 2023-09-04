@@ -37,7 +37,6 @@ const PostActions = ({
     if (createPostError) {
       alert((createPostError as ICustomError).data.message);
     }
-
     if (createPostData) {
       setOpen(false);
     }
@@ -47,7 +46,12 @@ const PostActions = ({
     <>
       <PostTagSection handleAddTag={handleAddTag} tags={tags} handleRemoveTag={handleRemoveTag} />
       <div className={styles.actions}>
-        <Button content="SAVE" cb={async () => await savePost({ video, tags })} />
+        <Button
+          content="SAVE"
+          cb={async () => {
+            await savePost({ video, tags });
+          }}
+        />
         <Button content="CANCEL" cb={removeVideo} />
       </div>
     </>
